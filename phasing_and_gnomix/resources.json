@@ -1,0 +1,30 @@
+{
+  "description": "Initial full-cohort v9 allocations. Large-chromosome union validation is ongoing; the chr22 pilot does not establish large-chromosome memory sufficiency. Configure before preparing another cohort.",
+  "phase_disk_gb": 1000,
+  "phase_timeout_hours": 336,
+  "inference": {"machine_type": "n2-standard-8", "ram_gib": 32, "vcpus": 8, "disk_gb": 50, "timeout_hours": 24},
+  "chromosomes": {
+    "1": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "2": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "3": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "4": {"machine_type": "m3-ultramem-64", "ram_gib": 1952, "heap_gb": 1792, "vcpus": 64, "threads": 32},
+    "5": {"machine_type": "m3-ultramem-64", "ram_gib": 1952, "heap_gb": 1792, "vcpus": 64, "threads": 32},
+    "6": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "7": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "8": {"machine_type": "n2d-highmem-96", "ram_gib": 768, "heap_gb": 704, "vcpus": 96, "threads": 32},
+    "9": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "10": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "11": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "12": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "13": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "14": {"machine_type": "m1-megamem-96", "ram_gib": 1433, "heap_gb": 1280, "vcpus": 96, "threads": 32},
+    "15": {"machine_type": "n2d-highmem-96", "ram_gib": 768, "heap_gb": 704, "vcpus": 96, "threads": 96},
+    "16": {"machine_type": "n2d-highmem-96", "ram_gib": 768, "heap_gb": 704, "vcpus": 96, "threads": 96},
+    "17": {"machine_type": "n2-highmem-80", "ram_gib": 640, "heap_gb": 576, "vcpus": 80, "threads": 80},
+    "18": {"machine_type": "n2d-highmem-96", "ram_gib": 768, "heap_gb": 704, "vcpus": 96, "threads": 96},
+    "19": {"machine_type": "n2-highmem-80", "ram_gib": 640, "heap_gb": 576, "vcpus": 80, "threads": 80},
+    "20": {"machine_type": "n2-highmem-80", "ram_gib": 640, "heap_gb": 576, "vcpus": 80, "threads": 80},
+    "21": {"machine_type": "n2-highmem-64", "ram_gib": 512, "heap_gb": 448, "vcpus": 64, "threads": 64},
+    "22": {"machine_type": "n2-highmem-32", "ram_gib": 256, "heap_gb": 224, "vcpus": 32, "threads": 32}
+  }
+}

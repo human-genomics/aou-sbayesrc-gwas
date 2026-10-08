@@ -9,6 +9,12 @@ logs/*
 scrap/
 tools/
 __pycache__/
+.pytest_cache/
+
+# Private operational packages/notes for the in-progress cohort run.
+# Reusable public workflow lives in phasing_and_gnomix/.
+/local_ancestry/
+/local_ancestry_diagnostics/
 
 AGENTS.md
 CLAUDE.md

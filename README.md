@@ -19,6 +19,12 @@ final REGENIE Step 1/Step 2 genotype inputs with GWAS-specific variant filters.
 The final optional example builds a height phenotype/covariate set and runs a
 continuous-trait REGENIE GWAS.
 
+Two optional downstream workflows reuse these inputs:
+[`pan_aou_gwas/`](pan_aou_gwas/README.md) runs phenotype-wide GWAS, and
+[`phasing_and_gnomix/`](phasing_and_gnomix/README.md) prepares phased genotypes
+and local ancestry for ancestry-specific scoring. Their scope and prerequisites
+are described under [Downstream workflows](#downstream-workflows).
+
 The pipeline **must be run from inside an AoU Verily Jupyter session
 terminal** (the standard interactive analysis environment on the All of Us
 Researcher Workbench). It cannot be run from an off-platform `wb` CLI
@@ -1322,7 +1328,55 @@ Observed Step 15 accounting from the completed cdrv9 run with
 | Rank-inverse normal transform applied | yes |
 | PCs included as covariates | 10 |
 
-## Downstream Phenotype Workflows
+## Downstream workflows
+
+These optional workflows build on the genotype preparation, sample selection
+and ancestry analysis above. They have separate entry points and output
+directories; `get_genotypes.sh` does not launch them automatically.
+
+### `pan_aou_gwas/`: phenotype-wide association testing
+
+[`pan_aou_gwas/`](pan_aou_gwas/README.md) builds many phenotypes from AoU survey
+responses, physical measurements and ZIP3 socioeconomic context, then runs
+PLINK 2 association tests using the shared HapMap3 HQ genotype set. It uses the
+third-degree-unrelated European `fit_pca_iids` set, with the workflow's sex
+covariate and identical-component exclusions. Phenotype manifests record
+coding, sample restrictions and covariates; quantitative and binary traits are
+pre-residualized before linear association testing.
+
+This is useful for producing consistently constructed GWAS summary statistics
+across many traits without rebuilding genotypes for each phenotype. Complete
+the main pipeline's sample/PC inputs and the [optional HapMap3 HQ
+bfile](#optional--hapmap3-hq-bfile) first. See its README for setup-only, smoke
+test and full-run commands, phenotype definitions and analysis assumptions.
+
+### `phasing_and_gnomix/`: haplotype ancestry and scoring inputs
+
+[`phasing_and_gnomix/`](phasing_and_gnomix/README.md) selects all WGS samples
+outside `classified_european_iids.txt`, together with a reproducible random
+sample of 50,000 unrelated Europeans from `fit_pca_iids.txt`. It reads the
+original AoU ACAF callset and phases the union of lifted pretrained Gnomix
+features and `sbayesrc_hg38.csv` SNPs, retaining matched variants with at most
+10% missing genotypes. Beagle performs population phasing; the pretrained
+Gnomix model and Gnofix then run for every selected sample.
+
+Unlike genome-wide ADMIXTURE fractions, local ancestry identifies the ancestry
+assigned to each haplotype along a chromosome. This enables downstream analyses
+such as applying an ancestry-specific predictor to segments of that ancestry.
+The workflow prepares the required inputs; it does not fit predictors or
+calculate polygenic scores. Outputs include Gnofix ancestry tracts, ancestry
+fractions, window-level called-ancestry posteriors, and retained SBayesRC SNPs
+with Gnofix phase corrections applied. All eight ancestry labels remain
+separate, including EUR and WAS.
+
+The workflow uses chromosome/shard directories in the workspace GCS bucket,
+tracked seeds, pinned public references and a resumable Batch coordinator.
+It validates a full chr22 pilot before submitting the remaining chromosomes.
+The README documents the output layout, allele/window mappings, resource
+settings and validation status. Participant data, run logs and private notes
+remain outside the public source directory; no karyograms are generated.
+
+### Other phenotype workflows
 
 Additional downstream workflows for educational attainment, household income,
 ETM cognitive task scores, and the final GradCPT/Flanker-enriched proxy

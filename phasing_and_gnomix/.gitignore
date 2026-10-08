@@ -1,0 +1,16 @@
+# Only source, pinned settings and documentation belong in this public directory.
+*
+!/.gitignore
+!/*.py
+!/README.md
+!/run.sh
+!/worker.sh
+!/cloud_smoke.sh
+!/config.json
+!/resources.json
+!/seeds.json
+!/requirements.txt
+!/requirements-orchestrator.txt
+!/tests/
+/tests/*
+!/tests/*.py
